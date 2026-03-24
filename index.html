@@ -104,6 +104,23 @@ nav { background:rgba(255,255,255,0.85); backdrop-filter:blur(20px); border-bott
 /* ── FOOTER ── */
 footer { border-top:1px solid #e2e8f0; padding:24px 32px; text-align:center; color:#94a3b8; font-size:13px; background:#fff }
 footer span { color:#2B3B96; font-weight:600 }
+
+/* ── SLACK TIP POPUP ── */
+.slack-tip-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.5); z-index:1000; align-items:center; justify-content:center }
+.slack-tip-overlay.show { display:flex }
+.slack-tip-box { background:#fff; border-radius:20px; padding:36px 40px; max-width:440px; width:90%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.2); animation:popIn .25s ease }
+@keyframes popIn { from { transform:scale(.85); opacity:0 } to { transform:scale(1); opacity:1 } }
+.slack-tip-icon { font-size:48px; margin-bottom:12px }
+.slack-tip-box h3 { font-size:20px; font-weight:800; color:#1e293b; margin-bottom:8px }
+.slack-tip-box p { color:#64748b; font-size:14px; line-height:1.6; margin-bottom:20px }
+.slack-tip-cmd { background:#f1f5f9; border-radius:12px; padding:14px 20px; font-size:18px; font-weight:800; color:#2B3B96; letter-spacing:.5px; margin-bottom:24px; cursor:pointer; transition:background .2s; display:flex; align-items:center; justify-content:center; gap:8px }
+.slack-tip-cmd:hover { background:#e2e8f0 }
+.slack-tip-copy { font-size:12px; color:#94a3b8; margin-top:-16px; margin-bottom:20px }
+.slack-tip-btns { display:flex; gap:10px; justify-content:center }
+.slack-tip-open { background:linear-gradient(135deg,#2B3B96,#3b5bdb); color:#fff; border:none; padding:12px 28px; border-radius:50px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; transition:all .2s }
+.slack-tip-open:hover { transform:translateY(-1px); box-shadow:0 4px 16px rgba(43,59,150,.3) }
+.slack-tip-close { background:#f1f5f9; color:#64748b; border:none; padding:12px 24px; border-radius:50px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit }
+
 </style>
 </head>
 <body>
@@ -254,7 +271,7 @@ footer span { color:#2B3B96; font-weight:600 }
     <div class="cta-section">
       <h3>Не нашли ответ?</h3>
       <p>Задайте вопрос бухгалтеру в Slack — ответим до 18:00 сегодня</p>
-      <a class="cta-btn fin" href="https://bilimland.slack.com/shortcuts/Ft0ANLGA9ZJ5/320546e92159de0dc85d4a4a4ce61fa3" onclick="var a=document.createElement('a');a.href='slack://app?team=T03HH1XKP&id=Ft0ANLGA9ZJ5';a.click();event.preventDefault();setTimeout(function(){window.location='https://bilimland.slack.com/shortcuts/Ft0ANLGA9ZJ5/320546e92159de0dc85d4a4a4ce61fa3'},1500)" target="_blank">
+      <a class="cta-btn fin" href="#" onclick="showSlackTip('fin');return false;" target="_blank">
         <span class="cta-btn-icon">💬</span> Задать вопрос бухгалтеру
       </a>
     </div>
@@ -375,7 +392,7 @@ footer span { color:#2B3B96; font-weight:600 }
     <div class="cta-section">
       <h3>Не нашли ответ?</h3>
       <p>Задайте вопрос HR в Slack — ответим до 18:00 сегодня</p>
-      <a class="cta-btn hr" href="https://bilimland.slack.com/shortcuts/Ft09NG6QAYTA/c5a01cad0175f1cc678df5689cd755fd" onclick="var a=document.createElement('a');a.href='slack://app?team=T03HH1XKP&id=Ft09NG6QAYTA';a.click();event.preventDefault();setTimeout(function(){window.location='https://bilimland.slack.com/shortcuts/Ft09NG6QAYTA/c5a01cad0175f1cc678df5689cd755fd'},1500)" target="_blank">
+      <a class="cta-btn hr" href="#" onclick="showSlackTip('hr');return false;" target="_blank">
         <span class="cta-btn-icon">💬</span> Задать вопрос HR
       </a>
     </div>
@@ -401,7 +418,7 @@ footer span { color:#2B3B96; font-weight:600 }
     <div class="cta-section">
       <h3>Есть вопрос прямо сейчас?</h3>
       <p>Задайте вопрос юристу в Slack — ответим до 18:00 следующего рабочего дня</p>
-      <a class="cta-btn legal" href="https://bilimland.slack.com/shortcuts/Ft09NG6QAYTA/c5a01cad0175f1cc678df5689cd755fd" onclick="var a=document.createElement('a');a.href='slack://app?team=T03HH1XKP&id=Ft09NG6QAYTA';a.click();event.preventDefault();setTimeout(function(){window.location='https://bilimland.slack.com/shortcuts/Ft09NG6QAYTA/c5a01cad0175f1cc678df5689cd755fd'},1500)" target="_blank">
+      <a class="cta-btn legal" href="#" onclick="showSlackTip('legal');return false;" target="_blank">
         <span class="cta-btn-icon">💬</span> Задать вопрос юристу
       </a>
     </div>
@@ -483,6 +500,57 @@ function removeHL(card) {
   if (!inner) return;
   inner.innerHTML = inner.innerHTML.replace(/<span class="hl">(.*?)<\/span>/gi, '$1');
 }
+
+// SLACK TIP
+const TIPS = {
+  fin:   { icon:'💰', title:'Задать вопрос бухгалтеру', cmd:'/FinQoldau',   link:'slack://app?team=T03HH1XKP&id=Ft0ANLGA9ZJ5' },
+  hr:    { icon:'👥', title:'Задать вопрос HR',          cmd:'/AskHR',       link:'slack://app?team=T03HH1XKP&id=Ft09NG6QAYTA' },
+  legal: { icon:'⚖️', title:'Задать вопрос юристу',      cmd:'/AskHR',       link:'slack://app?team=T03HH1XKP&id=Ft09NG6QAYTA' },
+};
+let _curLink = '';
+function showSlackTip(type) {
+  const t = TIPS[type];
+  document.getElementById('tipIcon').textContent = t.icon;
+  document.getElementById('tipTitle').textContent = t.title;
+  document.getElementById('tipCmdText').textContent = t.cmd;
+  document.getElementById('tipCopy').textContent = 'Нажмите на команду чтобы скопировать';
+  _curLink = t.link;
+  document.getElementById('slackTipOverlay').classList.add('show');
+}
+function closeSlackTip() {
+  document.getElementById('slackTipOverlay').classList.remove('show');
+}
+function copyCmd() {
+  const cmd = document.getElementById('tipCmdText').textContent;
+  navigator.clipboard.writeText(cmd).then(() => {
+    document.getElementById('tipCopy').textContent = '✅ Скопировано! Вставьте в Slack';
+  });
+}
+function openSlack() {
+  window.location.href = _curLink;
+  setTimeout(() => {
+    document.getElementById('tipCopy').textContent = 'Если Slack не открылся — введите команду вручную';
+  }, 1000);
+}
+
 </script>
+
+<!-- SLACK TIP POPUP -->
+<div class="slack-tip-overlay" id="slackTipOverlay" onclick="if(event.target===this)closeSlackTip()">
+  <div class="slack-tip-box">
+    <div class="slack-tip-icon" id="tipIcon">💬</div>
+    <h3 id="tipTitle">Задать вопрос бухгалтеру</h3>
+    <p id="tipText">Откройте Slack и введите команду в любом канале или в строке поиска:</p>
+    <div class="slack-tip-cmd" id="tipCmd" onclick="copyCmd()" title="Нажмите чтобы скопировать">
+      <span>⚡</span><span id="tipCmdText">/FinQoldau</span>
+    </div>
+    <div class="slack-tip-copy" id="tipCopy">Нажмите на команду чтобы скопировать</div>
+    <div class="slack-tip-btns">
+      <button class="slack-tip-open" onclick="openSlack()" id="tipOpenBtn">Открыть Slack</button>
+      <button class="slack-tip-close" onclick="closeSlackTip()">Закрыть</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
