@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bilim Group — Часто задаваемые вопросы</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box }
+body { font-family: -apple-system, 'SF Pro Display', 'Inter', system-ui, sans-serif; background:#F8FAFC; color:#1a1a2e; overflow-x:hidden }
+
+/* ── NAV ── */
+nav { background:rgba(255,255,255,0.85); backdrop-filter:blur(20px); border-bottom:1px solid rgba(43,59,150,0.08); padding:14px 32px; position:sticky; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between }
+.nav-logo { display:flex; align-items:center; gap:10px }
+.nav-icon { width:34px; height:34px; border-radius:10px; background:linear-gradient(135deg,#2B3B96,#8A2BE2); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:15px }
+.nav-title { font-weight:700; color:#2B3B96; font-size:15px }
+.nav-sub { color:#94a3b8; font-size:13px; margin-left:4px }
+.nav-tabs { display:flex; gap:4px; background:#f1f5f9; padding:4px; border-radius:14px }
+.nav-tab { padding:7px 18px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer; border:none; background:transparent; color:#64748b; transition:all .2s }
+.nav-tab.active { background:#fff; color:#2B3B96; box-shadow:0 1px 6px rgba(43,59,150,.1) }
+
+/* ── HERO ── */
+.hero { background:linear-gradient(135deg,#1e3a8a 0%,#2B3B96 30%,#4f46e5 60%,#8A2BE2 80%,#00CED1 100%); padding:56px 32px 48px; position:relative; overflow:hidden; text-align:center }
+.hero::before { content:''; position:absolute; top:-60px; right:-60px; width:320px; height:320px; border-radius:50%; background:rgba(0,206,209,.12); filter:blur(60px); pointer-events:none }
+.hero::after { content:''; position:absolute; bottom:-40px; left:-40px; width:260px; height:260px; border-radius:50%; background:rgba(138,43,226,.15); filter:blur(50px); pointer-events:none }
+.hero-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); padding:5px 14px; border-radius:20px; color:rgba(255,255,255,.9); font-size:12px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; margin-bottom:18px }
+.hero h1 { font-size:36px; font-weight:800; color:#fff; margin-bottom:10px; line-height:1.2 }
+.hero p { color:rgba(255,255,255,.72); font-size:15px; max-width:540px; margin:0 auto 32px; line-height:1.6 }
+.search-wrap { max-width:480px; margin:0 auto; position:relative }
+.search-wrap input { width:100%; padding:14px 48px 14px 20px; border-radius:50px; border:none; font-size:14px; outline:none; font-family:inherit; box-shadow:0 4px 24px rgba(0,0,0,.18); color:#1a1a2e }
+.search-wrap input::placeholder { color:#94a3b8 }
+.search-icon { position:absolute; right:16px; top:50%; transform:translateY(-50%); font-size:16px; pointer-events:none }
+
+/* ── DEPT TABS (main) ── */
+.dept-tabs { display:flex; gap:0; border-bottom:1px solid #e2e8f0; background:#fff; position:sticky; top:57px; z-index:90; padding:0 32px; overflow-x:auto }
+.dept-tab { padding:14px 24px; font-size:14px; font-weight:600; cursor:pointer; border:none; background:transparent; color:#94a3b8; border-bottom:2px solid transparent; transition:all .2s; white-space:nowrap; display:flex; align-items:center; gap:7px }
+.dept-tab.active { color:#2B3B96; border-bottom-color:#2B3B96 }
+.dept-tab:hover { color:#2B3B96 }
+
+/* ── LAYOUT ── */
+.main { max-width:860px; margin:0 auto; padding:36px 24px 60px }
+.panel { display:none }
+.panel.active { display:block }
+
+/* ── SECTION HEADER ── */
+.section-head { display:flex; align-items:center; gap:14px; margin-bottom:24px }
+.dept-icon { width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0 }
+.dept-icon.fin { background:linear-gradient(135deg,#2B3B96,#3b82f6) }
+.dept-icon.hr { background:linear-gradient(135deg,#7c3aed,#a855f7) }
+.dept-icon.legal { background:linear-gradient(135deg,#0f766e,#0d9488) }
+.section-head-text h2 { font-size:20px; font-weight:800; color:#1e293b }
+.section-head-text p { color:#64748b; font-size:13px; margin-top:2px }
+
+/* ── FAQ ACCORDION ── */
+.faq-group { margin-bottom:10px }
+.faq-group-title { font-size:11px; font-weight:700; color:#94a3b8; letter-spacing:1px; text-transform:uppercase; padding:0 4px; margin:20px 0 8px }
+.faq-card { background:#fff; border:1px solid #f1f5f9; border-radius:16px; overflow:hidden; margin-bottom:6px; box-shadow:0 1px 4px rgba(0,0,0,.04); transition:box-shadow .2s }
+.faq-card:hover { box-shadow:0 4px 16px rgba(43,59,150,.08) }
+.faq-q { width:100%; padding:16px 20px; border:none; background:transparent; text-align:left; font-size:14px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:12px; color:#1e293b; font-family:inherit }
+.faq-q-icon { font-size:20px; flex-shrink:0 }
+.faq-q-text { flex:1 }
+.faq-chevron { color:#cbd5e1; font-size:12px; transition:transform .25s; flex-shrink:0 }
+.faq-card.open .faq-chevron { transform:rotate(180deg) }
+.faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease }
+.faq-card.open .faq-a { max-height:800px }
+.faq-a-inner { padding:0 20px 18px; font-size:14px; line-height:1.75; color:#475569; border-top:1px solid #f8fafc }
+
+/* tables inside answers */
+.faq-a-inner table { width:100%; border-collapse:collapse; margin:10px 0; font-size:13px }
+.faq-a-inner th { background:#f8fafc; padding:8px 12px; text-align:left; font-weight:700; color:#64748b; border-bottom:2px solid #e2e8f0; font-size:12px }
+.faq-a-inner td { padding:8px 12px; border-bottom:1px solid #f8fafc; color:#334155 }
+.faq-a-inner a { color:#2B3B96; text-decoration:none; font-weight:500 }
+.faq-a-inner a:hover { text-decoration:underline }
+.tag { display:inline-block; padding:2px 9px; border-radius:20px; font-size:11px; font-weight:700; margin:0 2px }
+.tag-green { background:#dcfce7; color:#166534 }
+.tag-red { background:#fee2e2; color:#991b1b }
+.tag-blue { background:#dbeafe; color:#1e40af }
+.tag-amber { background:#fef3c7; color:#92400e }
+
+/* ── BIG CTA BUTTON ── */
+.cta-section { background:linear-gradient(135deg,#f0f4ff,#ede9fe); border-radius:24px; padding:32px; margin-top:32px; text-align:center; border:1px solid rgba(43,59,150,.1) }
+.cta-section h3 { font-size:18px; font-weight:800; color:#1e293b; margin-bottom:6px }
+.cta-section p { color:#64748b; font-size:14px; margin-bottom:24px; line-height:1.6 }
+.cta-btn { display:inline-flex; align-items:center; gap:10px; padding:15px 32px; border-radius:50px; font-size:15px; font-weight:700; color:#fff; text-decoration:none; cursor:pointer; border:none; font-family:inherit; transition:all .25s; box-shadow:0 4px 20px rgba(0,0,0,.15) }
+.cta-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,0,0,.2) }
+.cta-btn:active { transform:scale(.97) }
+.cta-btn.fin { background:linear-gradient(135deg,#2B3B96,#3b5bdb) }
+.cta-btn.hr { background:linear-gradient(135deg,#7c3aed,#a855f7) }
+.cta-btn.legal { background:linear-gradient(135deg,#0f766e,#0d9488) }
+.cta-btn-icon { font-size:20px }
+
+/* ── EMPTY STATE ── */
+.empty-state { text-align:center; padding:60px 20px }
+.empty-icon { font-size:56px; margin-bottom:16px }
+.empty-state h3 { font-size:18px; font-weight:700; color:#1e293b; margin-bottom:8px }
+.empty-state p { color:#94a3b8; font-size:14px; line-height:1.6 }
+.coming-badge { display:inline-flex; align-items:center; gap:6px; background:#fef3c7; border:1px solid #fde68a; color:#92400e; padding:6px 16px; border-radius:20px; font-size:12px; font-weight:700; margin-top:16px }
+
+/* ── SEARCH RESULTS ── */
+.no-results { text-align:center; padding:48px 20px; color:#94a3b8; font-size:14px; display:none }
+
+/* ── HIGHLIGHT ── */
+.hl { background:#fef08a; border-radius:3px; padding:0 2px }
+
+/* ── FOOTER ── */
+footer { border-top:1px solid #e2e8f0; padding:24px 32px; text-align:center; color:#94a3b8; font-size:13px; background:#fff }
+footer span { color:#2B3B96; font-weight:600 }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-icon">B</div>
+    <div>
+      <span class="nav-title">Bilim Group</span>
+      <span class="nav-sub">· FAQ корпоративных служб</span>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="setTab('fin')">💰 Бухгалтерия</div>
+    <div class="nav-tab" onclick="setTab('hr')">👥 HR</div>
+    <div class="nav-tab" onclick="setTab('legal')">⚖️ Юристы</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✦ Корпоративная база знаний</div>
+  <h1>Часто задаваемые вопросы</h1>
+  <p>Найдите ответ прежде чем обращаться в службу. Если не нашли — кнопка «Задать вопрос» внизу страницы.</p>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Поиск по всем вопросам..." oninput="doSearch(this.value)">
+    <div class="search-icon">🔍</div>
+  </div>
+</div>
+
+<!-- DEPT TABS -->
+<div class="dept-tabs">
+  <div class="dept-tab active" data-tab="fin" onclick="setTab('fin')">💰 Бухгалтерия</div>
+  <div class="dept-tab" data-tab="hr" onclick="setTab('hr')">👥 HR</div>
+  <div class="dept-tab" data-tab="legal" onclick="setTab('legal')">⚖️ Юридический отдел</div>
+</div>
+
+<div class="main">
+  <div class="no-results" id="no-results">По вашему запросу ничего не найдено. Попробуйте другие слова или задайте вопрос специалисту.</div>
+
+  <!-- ══ БУХГАЛТЕРИЯ ══ -->
+  <div class="panel active" id="panel-fin">
+    <div class="section-head">
+      <div class="dept-icon fin">💰</div>
+      <div class="section-head-text">
+        <h2>Бухгалтерия</h2>
+        <p>Зарплата, налоги, отпускные, больничные, расчётный листок</p>
+      </div>
+    </div>
+
+    <div class="faq-group-title">Зарплата</div>
+
+    <div class="faq-card" data-tags="зарплата оклад net gross расчет формула договор">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">💡</span>
+        <span class="faq-q-text">Как считается зарплата? Что такое NET и GROSS?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        В компании используется метод <strong>«от обратного» (NET)</strong> — в трудовом договоре указывается сумма, которую вы получаете на руки. Все налоги компания платит сверх этой суммы за свой счёт. Если в договоре 350 000 тг — именно столько вы и получите.<br><br>
+        <strong>Формула за неполный месяц:</strong> Оклад NET ÷ рабочие дни месяца = среднедневной заработок × отработанные дни.<br><br>
+        Для самостоятельного расчёта: <a href="https://mybuh.kz/useful/calc/" target="_blank">MyBuh.kz</a> и <a href="https://findh.org/811-kalkulyator-dlya-rascheta-nalogov-po-zarabotnoy-plate-v-kazahstane.html" target="_blank">FindHow.org</a>
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="налоги взносы опв восмс ипн осмс пенсионный социальный">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">📋</span>
+        <span class="faq-q-text">Какие налоги платятся с зарплаты?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <table>
+          <tr><th>Взнос</th><th>Ставка</th><th>Максимум</th></tr>
+          <tr><td>ОПВ (пенсионный)</td><td>10%</td><td>425 000 тг</td></tr>
+          <tr><td>ВОСМС</td><td>2%</td><td>17 000 тг/мес</td></tr>
+          <tr><td>ООСМС</td><td>3%</td><td>25 500 тг</td></tr>
+          <tr><td>Социальные отчисления</td><td>5%</td><td>29 750 тг</td></tr>
+          <tr><td>Социальный налог</td><td>11%</td><td>—</td></tr>
+          <tr><td>ОПВР</td><td>2,5%</td><td>мин 2 265 / макс 106 250 тг</td></tr>
+          <tr><td>ИПН</td><td>10%</td><td>только ГПХ и нерезиденты</td></tr>
+        </table>
+        <br>Проверить поступление ОПВ: <a href="https://egov.kz" target="_blank">eGov.kz</a> или приложение ENPF.<br>
+        От медвзносов освобождены: студенты, магистранты, лица с инвалидностью, пенсионеры.
+      </div></div>
+    </div>
+
+    <div class="faq-group-title">Отпускные</div>
+
+    <div class="faq-card" data-tags="отпуск отпускные дни расчет праздники">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">🏖️</span>
+        <span class="faq-q-text">Сколько дней отпуска и как считаются отпускные?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        По ТК РК ежегодный оплачиваемый отпуск — <strong>24 календарных дня</strong>. Рассчитывается по среднедневному заработку. Праздничные дни в период отпуска не оплачиваются.<br><br>
+        Калькулятор: <a href="https://findh.org/1177-onlayn-kalkulyator-otpusknyih-v-kazahstane.html" target="_blank">FindHow.org — расчёт отпускных</a>
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="индексация повышение оклад должность средний заработок">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">📈</span>
+        <span class="faq-q-text">Как индексация влияет на расчёт отпускных?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <span class="tag tag-green">✓ Применяется</span> — если повысили оклад без смены должности. Среднедневной заработок индексируется → отпускные считаются по новой ставке.<br><br>
+        <span class="tag tag-red">✗ Не применяется</span> — если повышение было при переводе на другую должность. Закон считает это «новой должностью».<br><br>
+        <em>Пример с индексацией:</em> 11 269 тг × 11 дней = 123 967 тг → к выплате <strong>109 091 тг</strong><br>
+        <em>Пример без индексации:</em> 6 574 тг × 11 дней = 72 314 тг → к выплате <strong>63 637 тг</strong>
+      </div></div>
+    </div>
+
+    <div class="faq-group-title">Больничные</div>
+
+    <div class="faq-card" data-tags="больничный лист лимит максимум выплата 2025">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">🏥</span>
+        <span class="faq-q-text">Как оплачивается больничный? Какой максимум?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Оплачивается работодателем за счёт собственных средств (п.1 ст.133 ТК РК).<br>
+        Максимальная выплата в 2025 году — <span class="tag tag-amber">25 МРП = 98 300 тенге</span><br><br>
+        <em>Пример 1 (15 дней, небольшой оклад):</em> 6 574 × 11 дней = 72 314 тг → к выплате <strong>63 637 тг</strong><br>
+        <em>Пример 2 (30 дней, высокий оклад):</em> расчётная сумма превышает лимит → выплачивается максимум 98 300 тг → к выплате <strong>86 504 тг</strong>
+      </div></div>
+    </div>
+
+    <div class="faq-group-title">Расчётный листок</div>
+
+    <div class="faq-card" data-tags="расчетный листок начислено удержано выплачено">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">📄</span>
+        <span class="faq-q-text">Как читать расчётный листок?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <strong>Начислено</strong> — оклад, отпускные, премии (сумма до удержаний).<br>
+        <strong>Удержано</strong> — ОПВ и ВОСМС (удерживаются из вашего NET-оклада).<br>
+        <strong>Выплачено</strong> — итоговая сумма. При полном месяце без отпуска и больничного = сумма в вашем договоре.
+      </div></div>
+    </div>
+
+    <div class="cta-section">
+      <h3>Не нашли ответ?</h3>
+      <p>Задайте вопрос бухгалтеру в Slack — ответим до 18:00 сегодня</p>
+      <a class="cta-btn fin" href="YOUR_FINANCE_WORKFLOW_LINK" target="_blank">
+        <span class="cta-btn-icon">💬</span> Задать вопрос бухгалтеру
+      </a>
+    </div>
+  </div>
+
+  <!-- ══ HR ══ -->
+  <div class="panel" id="panel-hr">
+    <div class="section-head">
+      <div class="dept-icon hr">👥</div>
+      <div class="section-head-text">
+        <h2>HR</h2>
+        <p>Отпуска, больничные, командировки, справки, льготы, Bilim Coin</p>
+      </div>
+    </div>
+
+    <div class="faq-group-title">Отпуск и больничный</div>
+
+    <div class="faq-card" data-tags="отпуск оформить заявка дни профиль трудовой">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">🏖️</span>
+        <span class="faq-q-text">Как оформить отпуск?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Оформляется самостоятельно через портал: <strong>Мой профиль → Отсутствия → Отпуск трудовой</strong>.<br><br>
+        <span class="tag tag-amber">⚠️ Важно</span> Заявку подавайте <strong>не менее чем за 14 дней</strong> до начала отпуска.<br><br>
+        Ежегодный отпуск по ТК РК — 24 календарных дня. Баланс доступных дней всегда виден в вашем профиле. Отпуск без содержания оформляется там же через соответствующий тип отсутствия. Праздничные дни в период отпуска не оплачиваются.<br><br>
+        <a href="https://bilimland.ismyteam.ru/profile/4/absence" target="_blank">→ Открыть раздел Отсутствия на портале</a>
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="больничный скрининг лист оформить прикрепить">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">🏥</span>
+        <span class="faq-q-text">Как оформить больничный?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <strong>Мой профиль → Отсутствия → Скрининг+Больничный лист BL</strong>.<br><br>
+        После выхода на работу прикрепите скан или фото листа нетрудоспособности. Максимальная выплата в 2025 году — 98 300 тенге. Подробнее о расчёте — в разделе Бухгалтерия этой страницы.
+      </div></div>
+    </div>
+
+    <div class="faq-group-title">Командировки и справки</div>
+
+    <div class="faq-card" data-tags="командировка заявка оформить согласование">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">✈️</span>
+        <span class="faq-q-text">Как оформить командировку?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <strong>Каталог заявок → Командировка</strong> (BilimLand) или Командировка InCraft / BF — в зависимости от вашего юридического лица.<br><br>
+        <span class="tag tag-amber">⚠️ Важно</span> Подавайте заблаговременно до поездки — нужно время на согласование.<br><br>
+        <a href="https://bilimland.ismyteam.ru/requests/list" target="_blank">→ Открыть каталог заявок</a>
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="справка место работы зарплатная документы банк">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">📄</span>
+        <span class="faq-q-text">Как получить справку с места работы или зарплатную справку?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Все справки через <strong>Каталог заявок</strong> на портале:<br><br>
+        <table>
+          <tr><th>Тип справки</th><th>Для кого</th></tr>
+          <tr><td>Справка с места работы</td><td>BilimLand, UpSkill, InCraft, BF</td></tr>
+          <tr><td>Зарплатная справка</td><td>BL/Upskill/BMG, Qlang/InCraft, BF</td></tr>
+        </table>
+        <br><span class="tag tag-blue">Срок</span> 1-2 рабочих дня после подачи заявки.
+      </div></div>
+    </div>
+
+    <div class="faq-group-title">Льготы и геймификация</div>
+
+    <div class="faq-card" data-tags="bilimcoin коин монета номинация коллега мерч магазин">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">🪙</span>
+        <span class="faq-q-text">Что такое Bilim Coin и как их потратить?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Bilim Coin — внутренняя валюта признания. Номинируйте коллегу за помощь или достижение: <strong>Каталог заявок → Заявка на номинацию Bilim Coin</strong>.<br><br>
+        Накопленные коины тратите в <a href="https://bilimland.ismyteam.ru/prizes-store/catalog" target="_blank">Bilim Store</a>: рюкзаки, термокружки, футболки, шопперы и другой мерч Bilim Group.<br><br>
+        Баланс коинов всегда виден в правом верхнем углу профиля на портале.
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="реферальная программа друг найм вознаграждение кандидат">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">🤝</span>
+        <span class="faq-q-text">Как поучаствовать в реферальной программе?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Знаете подходящего кандидата? Оформите заявку: <strong>Каталог заявок → Реферальная программа «Приведи друга в компанию»</strong>.<br><br>
+        При успешном найме вы получите вознаграждение согласно условиям программы.
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="byod kitap bilimland доступ сервис подбор вакансия">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">📱</span>
+        <span class="faq-q-text">BYOD, Kitap, ServiceDesk, подбор персонала — как оформить?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Все через <strong>Каталог заявок</strong> на портале:<br><br>
+        • <strong>BYOD</strong> — Заявка на участие в программе BYOD (личное устройство для работы)<br>
+        • <strong>Kitap + Bilimland</strong> — Запрос на доступ к библиотеке Kitap и платформе Bilimland (социальный пакет)<br>
+        • <strong>Технические вопросы</strong> — Заявка в ServiceDesk<br>
+        • <strong>Открыть вакансию</strong> — нажмите <strong>«+»</strong> в правом верхнем углу портала → Создать заявку на подбор
+      </div></div>
+    </div>
+
+    <div class="cta-section">
+      <h3>Не нашли ответ?</h3>
+      <p>Задайте вопрос HR в Slack — ответим до 18:00 сегодня</p>
+      <a class="cta-btn hr" href="YOUR_HR_WORKFLOW_LINK" target="_blank">
+        <span class="cta-btn-icon">💬</span> Задать вопрос HR
+      </a>
+    </div>
+  </div>
+
+  <!-- ══ ЮРИСТЫ ══ -->
+  <div class="panel" id="panel-legal">
+    <div class="section-head">
+      <div class="dept-icon legal">⚖️</div>
+      <div class="section-head-text">
+        <h2>Юридический отдел</h2>
+        <p>Договоры, NDA, госзакупки, консультации</p>
+      </div>
+    </div>
+
+    <div class="empty-state">
+      <div class="empty-icon">🚧</div>
+      <h3>База знаний в разработке</h3>
+      <p>Юридический отдел готовит ответы на самые частые вопросы.<br>Скоро здесь появится подробная информация о договорах,<br>доп. соглашениях, NDA и консультациях.</p>
+      <div class="coming-badge">⏳ Скоро здесь появится информация</div>
+    </div>
+
+    <div class="cta-section">
+      <h3>Есть вопрос прямо сейчас?</h3>
+      <p>Задайте вопрос юристу в Slack — ответим до 18:00 следующего рабочего дня</p>
+      <a class="cta-btn legal" href="YOUR_LEGAL_WORKFLOW_LINK" target="_blank">
+        <span class="cta-btn-icon">💬</span> Задать вопрос юристу
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Bilim Group</span> · Корпоративная база знаний · Срок ответа до 18:00 текущего рабочего дня
+</footer>
+
+<script>
+// ── TAB SWITCH ─────────────────────────────────────────
+function setTab(tab) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.dept-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+  document.querySelectorAll(`[data-tab="${tab}"]`).forEach(t => t.classList.add('active'));
+  document.querySelectorAll(`.nav-tab`).forEach(t => { if(t.textContent.toLowerCase().includes(tab==='fin'?'бух':tab==='hr'?'hr':'юр')) t.classList.add('active') });
+  document.getElementById('search').value = '';
+  document.getElementById('no-results').style.display = 'none';
+  document.querySelectorAll('.faq-card').forEach(c => { c.style.display = ''; removeHL(c) });
+}
+
+// ── ACCORDION ──────────────────────────────────────────
+function tog(btn) {
+  const card = btn.closest('.faq-card');
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.faq-card.open').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+// ── SEARCH ─────────────────────────────────────────────
+function doSearch(q) {
+  q = q.toLowerCase().trim();
+  const cards = document.querySelectorAll('.faq-card');
+  const panels = document.querySelectorAll('.panel');
+  const tabs = document.querySelector('.dept-tabs');
+
+  if (!q) {
+    tabs.style.display = 'flex';
+    panels.forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-fin').classList.add('active');
+    document.querySelectorAll('.dept-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('[data-tab="fin"]').classList.add('active');
+    cards.forEach(c => { c.style.display = ''; c.classList.remove('open'); removeHL(c) });
+    document.getElementById('no-results').style.display = 'none';
+    document.querySelectorAll('.empty-state,.cta-section,.faq-group-title').forEach(e => e.style.display = '');
+    return;
+  }
+
+  tabs.style.display = 'none';
+  panels.forEach(p => p.classList.add('active'));
+  document.querySelectorAll('.empty-state,.cta-section,.faq-group-title').forEach(e => e.style.display = 'none');
+
+  let found = 0;
+  cards.forEach(card => {
+    const txt = (card.textContent + ' ' + (card.dataset.tags || '')).toLowerCase();
+    if (txt.includes(q)) {
+      card.style.display = '';
+      card.classList.add('open');
+      applyHL(card, q);
+      found++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  document.getElementById('no-results').style.display = found ? 'none' : 'block';
+}
+
+function applyHL(card, q) {
+  removeHL(card);
+  const inner = card.querySelector('.faq-a-inner');
+  if (!inner) return;
+  inner.innerHTML = inner.innerHTML.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<span class="hl">$1</span>');
+}
+function removeHL(card) {
+  const inner = card.querySelector('.faq-a-inner');
+  if (!inner) return;
+  inner.innerHTML = inner.innerHTML.replace(/<span class="hl">(.*?)<\/span>/gi, '$1');
+}
+</script>
+</body>
+</html>
