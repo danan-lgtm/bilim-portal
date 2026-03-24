@@ -3,4 +3,486 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bilim Group — Часто задаваемые вопросы</title>
+<title>Bilim Group â Ð§Ð°ÑÑÐ¾ Ð·Ð°Ð´Ð°Ð²Ð°ÐµÐ¼ÑÐµ Ð²Ð¾Ð¿ÑÐ¾ÑÑ</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box }
+body { font-family: -apple-system, 'SF Pro Display', 'Inter', system-ui, sans-serif; background:#F8FAFC; color:#1a1a2e; overflow-x:hidden }
+
+/* ââ NAV ââ */
+nav { background:rgba(255,255,255,0.85); backdrop-filter:blur(20px); border-bottom:1px solid rgba(43,59,150,0.08); padding:14px 32px; position:sticky; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between }
+.nav-logo { display:flex; align-items:center; gap:10px }
+.nav-icon { width:34px; height:34px; border-radius:10px; background:linear-gradient(135deg,#2B3B96,#8A2BE2); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:15px }
+.nav-title { font-weight:700; color:#2B3B96; font-size:15px }
+.nav-sub { color:#94a3b8; font-size:13px; margin-left:4px }
+.nav-tabs { display:flex; gap:4px; background:#f1f5f9; padding:4px; border-radius:14px }
+.nav-tab { padding:7px 18px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer; border:none; background:transparent; color:#64748b; transition:all .2s }
+.nav-tab.active { background:#fff; color:#2B3B96; box-shadow:0 1px 6px rgba(43,59,150,.1) }
+
+/* ââ HERO ââ */
+.hero { background:linear-gradient(135deg,#1e3a8a 0%,#2B3B96 30%,#4f46e5 60%,#8A2BE2 80%,#00CED1 100%); padding:56px 32px 48px; position:relative; overflow:hidden; text-align:center }
+.hero::before { content:''; position:absolute; top:-60px; right:-60px; width:320px; height:320px; border-radius:50%; background:rgba(0,206,209,.12); filter:blur(60px); pointer-events:none }
+.hero::after { content:''; position:absolute; bottom:-40px; left:-40px; width:260px; height:260px; border-radius:50%; background:rgba(138,43,226,.15); filter:blur(50px); pointer-events:none }
+.hero-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); padding:5px 14px; border-radius:20px; color:rgba(255,255,255,.9); font-size:12px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; margin-bottom:18px }
+.hero h1 { font-size:36px; font-weight:800; color:#fff; margin-bottom:10px; line-height:1.2 }
+.hero p { color:rgba(255,255,255,.72); font-size:15px; max-width:540px; margin:0 auto 32px; line-height:1.6 }
+.search-wrap { max-width:480px; margin:0 auto; position:relative }
+.search-wrap input { width:100%; padding:14px 48px 14px 20px; border-radius:50px; border:none; font-size:14px; outline:none; font-family:inherit; box-shadow:0 4px 24px rgba(0,0,0,.18); color:#1a1a2e }
+.search-wrap input::placeholder { color:#94a3b8 }
+.search-icon { position:absolute; right:16px; top:50%; transform:translateY(-50%); font-size:16px; pointer-events:none }
+
+/* ââ DEPT TABS (main) ââ */
+.dept-tabs { display:flex; gap:0; border-bottom:1px solid #e2e8f0; background:#fff; position:sticky; top:57px; z-index:90; padding:0 32px; overflow-x:auto }
+.dept-tab { padding:14px 24px; font-size:14px; font-weight:600; cursor:pointer; border:none; background:transparent; color:#94a3b8; border-bottom:2px solid transparent; transition:all .2s; white-space:nowrap; display:flex; align-items:center; gap:7px }
+.dept-tab.active { color:#2B3B96; border-bottom-color:#2B3B96 }
+.dept-tab:hover { color:#2B3B96 }
+
+/* ââ LAYOUT ââ */
+.main { max-width:860px; margin:0 auto; padding:36px 24px 60px }
+.panel { display:none }
+.panel.active { display:block }
+
+/* ââ SECTION HEADER ââ */
+.section-head { display:flex; align-items:center; gap:14px; margin-bottom:24px }
+.dept-icon { width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0 }
+.dept-icon.fin { background:linear-gradient(135deg,#2B3B96,#3b82f6) }
+.dept-icon.hr { background:linear-gradient(135deg,#7c3aed,#a855f7) }
+.dept-icon.legal { background:linear-gradient(135deg,#0f766e,#0d9488) }
+.section-head-text h2 { font-size:20px; font-weight:800; color:#1e293b }
+.section-head-text p { color:#64748b; font-size:13px; margin-top:2px }
+
+/* ââ FAQ ACCORDION ââ */
+.faq-group { margin-bottom:10px }
+.faq-group-title { font-size:11px; font-weight:700; color:#94a3b8; letter-spacing:1px; text-transform:uppercase; padding:0 4px; margin:20px 0 8px }
+.faq-card { background:#fff; border:1px solid #f1f5f9; border-radius:16px; overflow:hidden; margin-bottom:6px; box-shadow:0 1px 4px rgba(0,0,0,.04); transition:box-shadow .2s }
+.faq-card:hover { box-shadow:0 4px 16px rgba(43,59,150,.08) }
+.faq-q { width:100%; padding:16px 20px; border:none; background:transparent; text-align:left; font-size:14px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:12px; color:#1e293b; font-family:inherit }
+.faq-q-icon { font-size:20px; flex-shrink:0 }
+.faq-q-text { flex:1 }
+.faq-chevron { color:#cbd5e1; font-size:12px; transition:transform .25s; flex-shrink:0 }
+.faq-card.open .faq-chevron { transform:rotate(180deg) }
+.faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease }
+.faq-card.open .faq-a { max-height:800px }
+.faq-a-inner { padding:0 20px 18px; font-size:14px; line-height:1.75; color:#475569; border-top:1px solid #f8fafc }
+
+/* tables inside answers */
+.faq-a-inner table { width:100%; border-collapse:collapse; margin:10px 0; font-size:13px }
+.faq-a-inner th { background:#f8fafc; padding:8px 12px; text-align:left; font-weight:700; color:#64748b; border-bottom:2px solid #e2e8f0; font-size:12px }
+.faq-a-inner td { padding:8px 12px; border-bottom:1px solid #f8fafc; color:#334155 }
+.faq-a-inner a { color:#2B3B96; text-decoration:none; font-weight:500 }
+.faq-a-inner a:hover { text-decoration:underline }
+.tag { display:inline-block; padding:2px 9px; border-radius:20px; font-size:11px; font-weight:700; margin:0 2px }
+.tag-green { background:#dcfce7; color:#166534 }
+.tag-red { background:#fee2e2; color:#991b1b }
+.tag-blue { background:#dbeafe; color:#1e40af }
+.tag-amber { background:#fef3c7; color:#92400e }
+
+/* ââ BIG CTA BUTTON ââ */
+.cta-section { background:linear-gradient(135deg,#f0f4ff,#ede9fe); border-radius:24px; padding:32px; margin-top:32px; text-align:center; border:1px solid rgba(43,59,150,.1) }
+.cta-section h3 { font-size:18px; font-weight:800; color:#1e293b; margin-bottom:6px }
+.cta-section p { color:#64748b; font-size:14px; margin-bottom:24px; line-height:1.6 }
+.cta-btn { display:inline-flex; align-items:center; gap:10px; padding:15px 32px; border-radius:50px; font-size:15px; font-weight:700; color:#fff; text-decoration:none; cursor:pointer; border:none; font-family:inherit; transition:all .25s; box-shadow:0 4px 20px rgba(0,0,0,.15) }
+.cta-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,0,0,.2) }
+.cta-btn:active { transform:scale(.97) }
+.cta-btn.fin { background:linear-gradient(135deg,#2B3B96,#3b5bdb) }
+.cta-btn.hr { background:linear-gradient(135deg,#7c3aed,#a855f7) }
+.cta-btn.legal { background:linear-gradient(135deg,#0f766e,#0d9488) }
+.cta-btn-icon { font-size:20px }
+
+/* ââ EMPTY STATE ââ */
+.empty-state { text-align:center; padding:60px 20px }
+.empty-icon { font-size:56px; margin-bottom:16px }
+.empty-state h3 { font-size:18px; font-weight:700; color:#1e293b; margin-bottom:8px }
+.empty-state p { color:#94a3b8; font-size:14px; line-height:1.6 }
+.coming-badge { display:inline-flex; align-items:center; gap:6px; background:#fef3c7; border:1px solid #fde68a; color:#92400e; padding:6px 16px; border-radius:20px; font-size:12px; font-weight:700; margin-top:16px }
+
+/* ââ SEARCH RESULTS ââ */
+.no-results { text-align:center; padding:48px 20px; color:#94a3b8; font-size:14px; display:none }
+
+/* ââ HIGHLIGHT ââ */
+.hl { background:#fef08a; border-radius:3px; padding:0 2px }
+
+/* ââ FOOTER ââ */
+footer { border-top:1px solid #e2e8f0; padding:24px 32px; text-align:center; color:#94a3b8; font-size:13px; background:#fff }
+footer span { color:#2B3B96; font-weight:600 }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-icon">B</div>
+    <div>
+      <span class="nav-title">Bilim Group</span>
+      <span class="nav-sub">Â· FAQ ÐºÐ¾ÑÐ¿Ð¾ÑÐ°ÑÐ¸Ð²Ð½ÑÑ ÑÐ»ÑÐ¶Ð±</span>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="setTab('fin')">ð° ÐÑÑÐ³Ð°Ð»ÑÐµÑÐ¸Ñ</div>
+    <div class="nav-tab" onclick="setTab('hr')">ð¥ HR</div>
+    <div class="nav-tab" onclick="setTab('legal')">âï¸ Ð®ÑÐ¸ÑÑÑ</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">â¦ ÐÐ¾ÑÐ¿Ð¾ÑÐ°ÑÐ¸Ð²Ð½Ð°Ñ Ð±Ð°Ð·Ð° Ð·Ð½Ð°Ð½Ð¸Ð¹</div>
+  <h1>Ð§Ð°ÑÑÐ¾ Ð·Ð°Ð´Ð°Ð²Ð°ÐµÐ¼ÑÐµ Ð²Ð¾Ð¿ÑÐ¾ÑÑ</h1>
+  <p>ÐÐ°Ð¹Ð´Ð¸ÑÐµ Ð¾ÑÐ²ÐµÑ Ð¿ÑÐµÐ¶Ð´Ðµ ÑÐµÐ¼ Ð¾Ð±ÑÐ°ÑÐ°ÑÑÑÑ Ð² ÑÐ»ÑÐ¶Ð±Ñ. ÐÑÐ»Ð¸ Ð½Ðµ Ð½Ð°ÑÐ»Ð¸ â ÐºÐ½Ð¾Ð¿ÐºÐ° Â«ÐÐ°Ð´Ð°ÑÑ Ð²Ð¾Ð¿ÑÐ¾ÑÂ» Ð²Ð½Ð¸Ð·Ñ ÑÑÑÐ°Ð½Ð¸ÑÑ.</p>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="ÐÐ¾Ð¸ÑÐº Ð¿Ð¾ Ð²ÑÐµÐ¼ Ð²Ð¾Ð¿ÑÐ¾ÑÐ°Ð¼..." oninput="doSearch(this.value)">
+    <div class="search-icon">ð</div>
+  </div>
+</div>
+
+<!-- DEPT TABS -->
+<div class="dept-tabs">
+  <div class="dept-tab active" data-tab="fin" onclick="setTab('fin')">ð° ÐÑÑÐ³Ð°Ð»ÑÐµÑÐ¸Ñ</div>
+  <div class="dept-tab" data-tab="hr" onclick="setTab('hr')">ð¥ HR</div>
+  <div class="dept-tab" data-tab="legal" onclick="setTab('legal')">âï¸ Ð®ÑÐ¸Ð´Ð¸ÑÐµÑÐºÐ¸Ð¹ Ð¾ÑÐ´ÐµÐ»</div>
+</div>
+
+<div class="main">
+  <div class="no-results" id="no-results">ÐÐ¾ Ð²Ð°ÑÐµÐ¼Ñ Ð·Ð°Ð¿ÑÐ¾ÑÑ Ð½Ð¸ÑÐµÐ³Ð¾ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾. ÐÐ¾Ð¿ÑÐ¾Ð±ÑÐ¹ÑÐµ Ð´ÑÑÐ³Ð¸Ðµ ÑÐ»Ð¾Ð²Ð° Ð¸Ð»Ð¸ Ð·Ð°Ð´Ð°Ð¹ÑÐµ Ð²Ð¾Ð¿ÑÐ¾Ñ ÑÐ¿ÐµÑÐ¸Ð°Ð»Ð¸ÑÑÑ.</div>
+
+  <!-- ââ ÐÐ£Ð¥ÐÐÐÐ¢ÐÐ ÐÐ¯ ââ -->
+  <div class="panel active" id="panel-fin">
+    <div class="section-head">
+      <div class="dept-icon fin">ð°</div>
+      <div class="section-head-text">
+        <h2>ÐÑÑÐ³Ð°Ð»ÑÐµÑÐ¸Ñ</h2>
+        <p>ÐÐ°ÑÐ¿Ð»Ð°ÑÐ°, Ð½Ð°Ð»Ð¾Ð³Ð¸, Ð¾ÑÐ¿ÑÑÐºÐ½ÑÐµ, Ð±Ð¾Ð»ÑÐ½Ð¸ÑÐ½ÑÐµ, ÑÐ°ÑÑÑÑÐ½ÑÐ¹ Ð»Ð¸ÑÑÐ¾Ðº</p>
+      </div>
+    </div>
+
+    <div class="faq-group-title">ÐÐ°ÑÐ¿Ð»Ð°ÑÐ°</div>
+
+    <div class="faq-card" data-tags="Ð·Ð°ÑÐ¿Ð»Ð°ÑÐ° Ð¾ÐºÐ»Ð°Ð´ net gross ÑÐ°ÑÑÐµÑ ÑÐ¾ÑÐ¼ÑÐ»Ð° Ð´Ð¾Ð³Ð¾Ð²Ð¾Ñ">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ð¡</span>
+        <span class="faq-q-text">ÐÐ°Ðº ÑÑÐ¸ÑÐ°ÐµÑÑÑ Ð·Ð°ÑÐ¿Ð»Ð°ÑÐ°? Ð§ÑÐ¾ ÑÐ°ÐºÐ¾Ðµ NET Ð¸ GROSS?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Ð ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ð¸ Ð¸ÑÐ¿Ð¾Ð»ÑÐ·ÑÐµÑÑÑ Ð¼ÐµÑÐ¾Ð´ <strong>Â«Ð¾Ñ Ð¾Ð±ÑÐ°ÑÐ½Ð¾Ð³Ð¾Â» (NET)</strong> â Ð² ÑÑÑÐ´Ð¾Ð²Ð¾Ð¼ Ð´Ð¾Ð³Ð¾Ð²Ð¾ÑÐµ ÑÐºÐ°Ð·ÑÐ²Ð°ÐµÑÑÑ ÑÑÐ¼Ð¼Ð°, ÐºÐ¾ÑÐ¾ÑÑÑ Ð²Ñ Ð¿Ð¾Ð»ÑÑÐ°ÐµÑÐµ Ð½Ð° ÑÑÐºÐ¸. ÐÑÐµ Ð½Ð°Ð»Ð¾Ð³Ð¸ ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ñ Ð¿Ð»Ð°ÑÐ¸Ñ ÑÐ²ÐµÑÑ ÑÑÐ¾Ð¹ ÑÑÐ¼Ð¼Ñ Ð·Ð° ÑÐ²Ð¾Ð¹ ÑÑÑÑ. ÐÑÐ»Ð¸ Ð² Ð´Ð¾Ð³Ð¾Ð²Ð¾ÑÐµ 350 000 ÑÐ³ â Ð¸Ð¼ÐµÐ½Ð½Ð¾ ÑÑÐ¾Ð»ÑÐºÐ¾ Ð²Ñ Ð¸ Ð¿Ð¾Ð»ÑÑÐ¸ÑÐµ.<br><br>
+        <strong>Ð¤Ð¾ÑÐ¼ÑÐ»Ð° Ð·Ð° Ð½ÐµÐ¿Ð¾Ð»Ð½ÑÐ¹ Ð¼ÐµÑÑÑ:</strong> ÐÐºÐ»Ð°Ð´ NET Ã· ÑÐ°Ð±Ð¾ÑÐ¸Ðµ Ð´Ð½Ð¸ Ð¼ÐµÑÑÑÐ° = ÑÑÐµÐ´Ð½ÐµÐ´Ð½ÐµÐ²Ð½Ð¾Ð¹ Ð·Ð°ÑÐ°Ð±Ð¾ÑÐ¾Ðº Ã Ð¾ÑÑÐ°Ð±Ð¾ÑÐ°Ð½Ð½ÑÐµ Ð´Ð½Ð¸.<br><br>
+        ÐÐ»Ñ ÑÐ°Ð¼Ð¾ÑÑÐ¾ÑÑÐµÐ»ÑÐ½Ð¾Ð³Ð¾ ÑÐ°ÑÑÑÑÐ°: <a href="https://mybuh.kz/useful/calc/" target="_blank">MyBuh.kz</a> Ð¸ <a href="https://findh.org/811-kalkulyator-dlya-rascheta-nalogov-po-zarabotnoy-plate-v-kazahstane.html" target="_blank">FindHow.org</a>
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="Ð½Ð°Ð»Ð¾Ð³Ð¸ Ð²Ð·Ð½Ð¾ÑÑ Ð¾Ð¿Ð² Ð²Ð¾ÑÐ¼Ñ Ð¸Ð¿Ð½ Ð¾ÑÐ¼Ñ Ð¿ÐµÐ½ÑÐ¸Ð¾Ð½Ð½ÑÐ¹ ÑÐ¾ÑÐ¸Ð°Ð»ÑÐ½ÑÐ¹">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ð</span>
+        <span class="faq-q-text">ÐÐ°ÐºÐ¸Ðµ Ð½Ð°Ð»Ð¾Ð³Ð¸ Ð¿Ð»Ð°ÑÑÑÑÑ Ñ Ð·Ð°ÑÐ¿Ð»Ð°ÑÑ?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <table>
+          <tr><th>ÐÐ·Ð½Ð¾Ñ</th><th>Ð¡ÑÐ°Ð²ÐºÐ°</th><th>ÐÐ°ÐºÑÐ¸Ð¼ÑÐ¼</th></tr>
+          <tr><td>ÐÐÐ (Ð¿ÐµÐ½ÑÐ¸Ð¾Ð½Ð½ÑÐ¹)</td><td>10%</td><td>425 000 ÑÐ³</td></tr>
+          <tr><td>ÐÐÐ¡ÐÐ¡</td><td>2%</td><td>17 000 ÑÐ³/Ð¼ÐµÑ</td></tr>
+          <tr><td>ÐÐÐ¡ÐÐ¡</td><td>3%</td><td>25 500 ÑÐ³</td></tr>
+          <tr><td>Ð¡Ð¾ÑÐ¸Ð°Ð»ÑÐ½ÑÐµ Ð¾ÑÑÐ¸ÑÐ»ÐµÐ½Ð¸Ñ</td><td>5%</td><td>29 750 ÑÐ³</td></tr>
+          <tr><td>Ð¡Ð¾ÑÐ¸Ð°Ð»ÑÐ½ÑÐ¹ Ð½Ð°Ð»Ð¾Ð³</td><td>11%</td><td>â</td></tr>
+          <tr><td>ÐÐÐÐ </td><td>2,5%</td><td>Ð¼Ð¸Ð½ 2 265 / Ð¼Ð°ÐºÑ 106 250 ÑÐ³</td></tr>
+          <tr><td>ÐÐÐ</td><td>10%</td><td>ÑÐ¾Ð»ÑÐºÐ¾ ÐÐÐ¥ Ð¸ Ð½ÐµÑÐµÐ·Ð¸Ð´ÐµÐ½ÑÑ</td></tr>
+        </table>
+        <br>ÐÑÐ¾Ð²ÐµÑÐ¸ÑÑ Ð¿Ð¾ÑÑÑÐ¿Ð»ÐµÐ½Ð¸Ðµ ÐÐÐ: <a href="https://egov.kz" target="_blank">eGov.kz</a> Ð¸Ð»Ð¸ Ð¿ÑÐ¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ ENPF.<br>
+        ÐÑ Ð¼ÐµÐ´Ð²Ð·Ð½Ð¾ÑÐ¾Ð² Ð¾ÑÐ²Ð¾Ð±Ð¾Ð¶Ð´ÐµÐ½Ñ: ÑÑÑÐ´ÐµÐ½ÑÑ, Ð¼Ð°Ð³Ð¸ÑÑÑÐ°Ð½ÑÑ, Ð»Ð¸ÑÐ° Ñ Ð¸Ð½Ð²Ð°Ð»Ð¸Ð´Ð½Ð¾ÑÑÑÑ, Ð¿ÐµÐ½ÑÐ¸Ð¾Ð½ÐµÑÑ.
+      </div></div>
+    </div>
+
+    <div class="faq-group-title">ÐÑÐ¿ÑÑÐºÐ½ÑÐµ</div>
+
+    <div class="faq-card" data-tags="Ð¾ÑÐ¿ÑÑÐº Ð¾ÑÐ¿ÑÑÐºÐ½ÑÐµ Ð´Ð½Ð¸ ÑÐ°ÑÑÐµÑ Ð¿ÑÐ°Ð·Ð´Ð½Ð¸ÐºÐ¸">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ðï¸</span>
+        <span class="faq-q-text">Ð¡ÐºÐ¾Ð»ÑÐºÐ¾ Ð´Ð½ÐµÐ¹ Ð¾ÑÐ¿ÑÑÐºÐ° Ð¸ ÐºÐ°Ðº ÑÑÐ¸ÑÐ°ÑÑÑÑ Ð¾ÑÐ¿ÑÑÐºÐ½ÑÐµ?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        ÐÐ¾ Ð¢Ð Ð Ð ÐµÐ¶ÐµÐ³Ð¾Ð´Ð½ÑÐ¹ Ð¾Ð¿Ð»Ð°ÑÐ¸Ð²Ð°ÐµÐ¼ÑÐ¹ Ð¾ÑÐ¿ÑÑÐº â <strong>24 ÐºÐ°Ð»ÐµÐ½Ð´Ð°ÑÐ½ÑÑ Ð´Ð½Ñ</strong>. Ð Ð°ÑÑÑÐ¸ÑÑÐ²Ð°ÐµÑÑÑ Ð¿Ð¾ ÑÑÐµÐ´Ð½ÐµÐ´Ð½ÐµÐ²Ð½Ð¾Ð¼Ñ Ð·Ð°ÑÐ°Ð±Ð¾ÑÐºÑ. ÐÑÐ°Ð·Ð´Ð½Ð¸ÑÐ½ÑÐµ Ð´Ð½Ð¸ Ð² Ð¿ÐµÑÐ¸Ð¾Ð´ Ð¾ÑÐ¿ÑÑÐºÐ° Ð½Ðµ Ð¾Ð¿Ð»Ð°ÑÐ¸Ð²Ð°ÑÑÑÑ.<br><br>
+        ÐÐ°Ð»ÑÐºÑÐ»ÑÑÐ¾Ñ: <a href="https://findh.org/1177-onlayn-kalkulyator-otpusknyih-v-kazahstane.html" target="_blank">FindHow.org â ÑÐ°ÑÑÑÑ Ð¾ÑÐ¿ÑÑÐºÐ½ÑÑ</a>
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="Ð¸Ð½Ð´ÐµÐºÑÐ°ÑÐ¸Ñ Ð¿Ð¾Ð²ÑÑÐµÐ½Ð¸Ðµ Ð¾ÐºÐ»Ð°Ð´ Ð´Ð¾Ð»Ð¶Ð½Ð¾ÑÑÑ ÑÑÐµÐ´Ð½Ð¸Ð¹ Ð·Ð°ÑÐ°Ð±Ð¾ÑÐ¾Ðº">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ð</span>
+        <span class="faq-q-text">ÐÐ°Ðº Ð¸Ð½Ð´ÐµÐºÑÐ°ÑÐ¸Ñ Ð²Ð»Ð¸ÑÐµÑ Ð½Ð° ÑÐ°ÑÑÑÑ Ð¾ÑÐ¿ÑÑÐºÐ½ÑÑ?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <span class="tag tag-green">â ÐÑÐ¸Ð¼ÐµÐ½ÑÐµÑÑÑ</span> â ÐµÑÐ»Ð¸ Ð¿Ð¾Ð²ÑÑÐ¸Ð»Ð¸ Ð¾ÐºÐ»Ð°Ð´ Ð±ÐµÐ· ÑÐ¼ÐµÐ½Ñ Ð´Ð¾Ð»Ð¶Ð½Ð¾ÑÑÐ¸. Ð¡ÑÐµÐ´Ð½ÐµÐ´Ð½ÐµÐ²Ð½Ð¾Ð¹ Ð·Ð°ÑÐ°Ð±Ð¾ÑÐ¾Ðº Ð¸Ð½Ð´ÐµÐºÑÐ¸ÑÑÐµÑÑÑ â Ð¾ÑÐ¿ÑÑÐºÐ½ÑÐµ ÑÑÐ¸ÑÐ°ÑÑÑÑ Ð¿Ð¾ Ð½Ð¾Ð²Ð¾Ð¹ ÑÑÐ°Ð²ÐºÐµ.<br><br>
+        <span class="tag tag-red">â ÐÐµ Ð¿ÑÐ¸Ð¼ÐµÐ½ÑÐµÑÑÑ</span> â ÐµÑÐ»Ð¸ Ð¿Ð¾Ð²ÑÑÐµÐ½Ð¸Ðµ Ð±ÑÐ»Ð¾ Ð¿ÑÐ¸ Ð¿ÐµÑÐµÐ²Ð¾Ð´Ðµ Ð½Ð° Ð´ÑÑÐ³ÑÑ Ð´Ð¾Ð»Ð¶Ð½Ð¾ÑÑÑ. ÐÐ°ÐºÐ¾Ð½ ÑÑÐ¸ÑÐ°ÐµÑ ÑÑÐ¾ Â«Ð½Ð¾Ð²Ð¾Ð¹ Ð´Ð¾Ð»Ð¶Ð½Ð¾ÑÑÑÑÂ».<br><br>
+        <em>ÐÑÐ¸Ð¼ÐµÑ Ñ Ð¸Ð½Ð´ÐµÐºÑÐ°ÑÐ¸ÐµÐ¹:</em> 11 269 ÑÐ³ Ã 11 Ð´Ð½ÐµÐ¹ = 123 967 ÑÐ³ â Ðº Ð²ÑÐ¿Ð»Ð°ÑÐµ <strong>109 091 ÑÐ³</strong><br>
+        <em>ÐÑÐ¸Ð¼ÐµÑ Ð±ÐµÐ· Ð¸Ð½Ð´ÐµÐºÑÐ°ÑÐ¸Ð¸:</em> 6 574 ÑÐ³ Ã 11 Ð´Ð½ÐµÐ¹ = 72 314 ÑÐ³ â Ðº Ð²ÑÐ¿Ð»Ð°ÑÐµ <strong>63 637 ÑÐ³</strong>
+      </div></div>
+    </div>
+
+    <div class="faq-group-title">ÐÐ¾Ð»ÑÐ½Ð¸ÑÐ½ÑÐµ</div>
+
+    <div class="faq-card" data-tags="Ð±Ð¾Ð»ÑÐ½Ð¸ÑÐ½ÑÐ¹ Ð»Ð¸ÑÑ Ð»Ð¸Ð¼Ð¸Ñ Ð¼Ð°ÐºÑÐ¸Ð¼ÑÐ¼ Ð²ÑÐ¿Ð»Ð°ÑÐ° 2025">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ð¥</span>
+        <span class="faq-q-text">ÐÐ°Ðº Ð¾Ð¿Ð»Ð°ÑÐ¸Ð²Ð°ÐµÑÑÑ Ð±Ð¾Ð»ÑÐ½Ð¸ÑÐ½ÑÐ¹? ÐÐ°ÐºÐ¾Ð¹ Ð¼Ð°ÐºÑÐ¸Ð¼ÑÐ¼?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        ÐÐ¿Ð»Ð°ÑÐ¸Ð²Ð°ÐµÑÑÑ ÑÐ°Ð±Ð¾ÑÐ¾Ð´Ð°ÑÐµÐ»ÐµÐ¼ Ð·Ð° ÑÑÑÑ ÑÐ¾Ð±ÑÑÐ²ÐµÐ½Ð½ÑÑ ÑÑÐµÐ´ÑÑÐ² (Ð¿.1 ÑÑ.133 Ð¢Ð Ð Ð).<br>
+        ÐÐ°ÐºÑÐ¸Ð¼Ð°Ð»ÑÐ½Ð°Ñ Ð²ÑÐ¿Ð»Ð°ÑÐ° Ð² 2025 Ð³Ð¾Ð´Ñ â <span class="tag tag-amber">25 ÐÐ Ð = 98 300 ÑÐµÐ½Ð³Ðµ</span><br><br>
+        <em>ÐÑÐ¸Ð¼ÐµÑ 1 (15 Ð´Ð½ÐµÐ¹, Ð½ÐµÐ±Ð¾Ð»ÑÑÐ¾Ð¹ Ð¾ÐºÐ»Ð°Ð´):</em> 6 574 Ã 11 Ð´Ð½ÐµÐ¹ = 72 314 ÑÐ³ â Ðº Ð²ÑÐ¿Ð»Ð°ÑÐµ <strong>63 637 ÑÐ³</strong><br>
+        <em>ÐÑÐ¸Ð¼ÐµÑ 2 (30 Ð´Ð½ÐµÐ¹, Ð²ÑÑÐ¾ÐºÐ¸Ð¹ Ð¾ÐºÐ»Ð°Ð´):</em> ÑÐ°ÑÑÑÑÐ½Ð°Ñ ÑÑÐ¼Ð¼Ð° Ð¿ÑÐµÐ²ÑÑÐ°ÐµÑ Ð»Ð¸Ð¼Ð¸Ñ â Ð²ÑÐ¿Ð»Ð°ÑÐ¸Ð²Ð°ÐµÑÑÑ Ð¼Ð°ÐºÑÐ¸Ð¼ÑÐ¼ 98 300 ÑÐ³ â Ðº Ð²ÑÐ¿Ð»Ð°ÑÐµ <strong>86 504 ÑÐ³</strong>
+      </div></div>
+    </div>
+
+    <div class="faq-group-title">Ð Ð°ÑÑÑÑÐ½ÑÐ¹ Ð»Ð¸ÑÑÐ¾Ðº</div>
+
+    <div class="faq-card" data-tags="ÑÐ°ÑÑÐµÑÐ½ÑÐ¹ Ð»Ð¸ÑÑÐ¾Ðº Ð½Ð°ÑÐ¸ÑÐ»ÐµÐ½Ð¾ ÑÐ´ÐµÑÐ¶Ð°Ð½Ð¾ Ð²ÑÐ¿Ð»Ð°ÑÐµÐ½Ð¾">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ð</span>
+        <span class="faq-q-text">ÐÐ°Ðº ÑÐ¸ÑÐ°ÑÑ ÑÐ°ÑÑÑÑÐ½ÑÐ¹ Ð»Ð¸ÑÑÐ¾Ðº?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <strong>ÐÐ°ÑÐ¸ÑÐ»ÐµÐ½Ð¾</strong> â Ð¾ÐºÐ»Ð°Ð´, Ð¾ÑÐ¿ÑÑÐºÐ½ÑÐµ, Ð¿ÑÐµÐ¼Ð¸Ð¸ (ÑÑÐ¼Ð¼Ð° Ð´Ð¾ ÑÐ´ÐµÑÐ¶Ð°Ð½Ð¸Ð¹).<br>
+        <strong>Ð£Ð´ÐµÑÐ¶Ð°Ð½Ð¾</strong> â ÐÐÐ Ð¸ ÐÐÐ¡ÐÐ¡ (ÑÐ´ÐµÑÐ¶Ð¸Ð²Ð°ÑÑÑÑ Ð¸Ð· Ð²Ð°ÑÐµÐ³Ð¾ NET-Ð¾ÐºÐ»Ð°Ð´Ð°).<br>
+        <strong>ÐÑÐ¿Ð»Ð°ÑÐµÐ½Ð¾</strong> â Ð¸ÑÐ¾Ð³Ð¾Ð²Ð°Ñ ÑÑÐ¼Ð¼Ð°. ÐÑÐ¸ Ð¿Ð¾Ð»Ð½Ð¾Ð¼ Ð¼ÐµÑÑÑÐµ Ð±ÐµÐ· Ð¾ÑÐ¿ÑÑÐºÐ° Ð¸ Ð±Ð¾Ð»ÑÐ½Ð¸ÑÐ½Ð¾Ð³Ð¾ = ÑÑÐ¼Ð¼Ð° Ð² Ð²Ð°ÑÐµÐ¼ Ð´Ð¾Ð³Ð¾Ð²Ð¾ÑÐµ.
+      </div></div>
+    </div>
+
+    <div class="cta-section">
+      <h3>ÐÐµ Ð½Ð°ÑÐ»Ð¸ Ð¾ÑÐ²ÐµÑ?</h3>
+      <p>ÐÐ°Ð´Ð°Ð¹ÑÐµ Ð²Ð¾Ð¿ÑÐ¾Ñ Ð±ÑÑÐ³Ð°Ð»ÑÐµÑÑ Ð² Slack â Ð¾ÑÐ²ÐµÑÐ¸Ð¼ Ð´Ð¾ 18:00 ÑÐµÐ³Ð¾Ð´Ð½Ñ</p>
+      <a class="cta-btn fin" href="https://slack.com/shortcuts/Ft0ANLGA9ZJ5/320546e92159de0dc85d4a4a4ce61fa3" target="_blank">
+        <span class="cta-btn-icon">ð¬</span> ÐÐ°Ð´Ð°ÑÑ Ð²Ð¾Ð¿ÑÐ¾Ñ Ð±ÑÑÐ³Ð°Ð»ÑÐµÑÑ
+      </a>
+    </div>
+  </div>
+
+  <!-- ââ HR ââ -->
+  <div class="panel" id="panel-hr">
+    <div class="section-head">
+      <div class="dept-icon hr">ð¥</div>
+      <div class="section-head-text">
+        <h2>HR</h2>
+        <p>ÐÑÐ¿ÑÑÐºÐ°, Ð±Ð¾Ð»ÑÐ½Ð¸ÑÐ½ÑÐµ, ÐºÐ¾Ð¼Ð°Ð½Ð´Ð¸ÑÐ¾Ð²ÐºÐ¸, ÑÐ¿ÑÐ°Ð²ÐºÐ¸, Ð»ÑÐ³Ð¾ÑÑ, Bilim Coin</p>
+      </div>
+    </div>
+
+    <div class="faq-group-title">ÐÑÐ¿ÑÑÐº Ð¸ Ð±Ð¾Ð»ÑÐ½Ð¸ÑÐ½ÑÐ¹</div>
+
+    <div class="faq-card" data-tags="Ð¾ÑÐ¿ÑÑÐº Ð¾ÑÐ¾ÑÐ¼Ð¸ÑÑ Ð·Ð°ÑÐ²ÐºÐ° Ð´Ð½Ð¸ Ð¿ÑÐ¾ÑÐ¸Ð»Ñ ÑÑÑÐ´Ð¾Ð²Ð¾Ð¹">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ðï¸</span>
+        <span class="faq-q-text">ÐÐ°Ðº Ð¾ÑÐ¾ÑÐ¼Ð¸ÑÑ Ð¾ÑÐ¿ÑÑÐº?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        ÐÑÐ¾ÑÐ¼Ð»ÑÐµÑÑÑ ÑÐ°Ð¼Ð¾ÑÑÐ¾ÑÑÐµÐ»ÑÐ½Ð¾ ÑÐµÑÐµÐ· Ð¿Ð¾ÑÑÐ°Ð»: <strong>ÐÐ¾Ð¹ Ð¿ÑÐ¾ÑÐ¸Ð»Ñ â ÐÑÑÑÑÑÑÐ²Ð¸Ñ â ÐÑÐ¿ÑÑÐº ÑÑÑÐ´Ð¾Ð²Ð¾Ð¹</strong>.<br><br>
+        <span class="tag tag-amber">â ï¸ ÐÐ°Ð¶Ð½Ð¾</span> ÐÐ°ÑÐ²ÐºÑ Ð¿Ð¾Ð´Ð°Ð²Ð°Ð¹ÑÐµ <strong>Ð½Ðµ Ð¼ÐµÐ½ÐµÐµ ÑÐµÐ¼ Ð·Ð° 14 Ð´Ð½ÐµÐ¹</strong> Ð´Ð¾ Ð½Ð°ÑÐ°Ð»Ð° Ð¾ÑÐ¿ÑÑÐºÐ°.<br><br>
+        ÐÐ¶ÐµÐ³Ð¾Ð´Ð½ÑÐ¹ Ð¾ÑÐ¿ÑÑÐº Ð¿Ð¾ Ð¢Ð Ð Ð â 24 ÐºÐ°Ð»ÐµÐ½Ð´Ð°ÑÐ½ÑÑ Ð´Ð½Ñ. ÐÐ°Ð»Ð°Ð½Ñ Ð´Ð¾ÑÑÑÐ¿Ð½ÑÑ Ð´Ð½ÐµÐ¹ Ð²ÑÐµÐ³Ð´Ð° Ð²Ð¸Ð´ÐµÐ½ Ð² Ð²Ð°ÑÐµÐ¼ Ð¿ÑÐ¾ÑÐ¸Ð»Ðµ. ÐÑÐ¿ÑÑÐº Ð±ÐµÐ· ÑÐ¾Ð´ÐµÑÐ¶Ð°Ð½Ð¸Ñ Ð¾ÑÐ¾ÑÐ¼Ð»ÑÐµÑÑÑ ÑÐ°Ð¼ Ð¶Ðµ ÑÐµÑÐµÐ· ÑÐ¾Ð¾ÑÐ²ÐµÑÑÑÐ²ÑÑÑÐ¸Ð¹ ÑÐ¸Ð¿ Ð¾ÑÑÑÑÑÑÐ²Ð¸Ñ. ÐÑÐ°Ð·Ð´Ð½Ð¸ÑÐ½ÑÐµ Ð´Ð½Ð¸ Ð² Ð¿ÐµÑÐ¸Ð¾Ð´ Ð¾ÑÐ¿ÑÑÐºÐ° Ð½Ðµ Ð¾Ð¿Ð»Ð°ÑÐ¸Ð²Ð°ÑÑÑÑ.<br><br>
+        <a href="https://bilimland.ismyteam.ru/profile/4/absence" target="_blank">â ÐÑÐºÑÑÑÑ ÑÐ°Ð·Ð´ÐµÐ» ÐÑÑÑÑÑÑÐ²Ð¸Ñ Ð½Ð° Ð¿Ð¾ÑÑÐ°Ð»Ðµ</a>
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="Ð±Ð¾Ð»ÑÐ½Ð¸ÑÐ½ÑÐ¹ ÑÐºÑÐ¸Ð½Ð¸Ð½Ð³ Ð»Ð¸ÑÑ Ð¾ÑÐ¾ÑÐ¼Ð¸ÑÑ Ð¿ÑÐ¸ÐºÑÐµÐ¿Ð¸ÑÑ">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ð¥</span>
+        <span class="faq-q-text">ÐÐ°Ðº Ð¾ÑÐ¾ÑÐ¼Ð¸ÑÑ Ð±Ð¾Ð»ÑÐ½Ð¸ÑÐ½ÑÐ¹?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <strong>ÐÐ¾Ð¹ Ð¿ÑÐ¾ÑÐ¸Ð»Ñ â ÐÑÑÑÑÑÑÐ²Ð¸Ñ â Ð¡ÐºÑÐ¸Ð½Ð¸Ð½Ð³+ÐÐ¾Ð»ÑÐ½Ð¸ÑÐ½ÑÐ¹ Ð»Ð¸ÑÑ BL</strong>.<br><br>
+        ÐÐ¾ÑÐ»Ðµ Ð²ÑÑÐ¾Ð´Ð° Ð½Ð° ÑÐ°Ð±Ð¾ÑÑ Ð¿ÑÐ¸ÐºÑÐµÐ¿Ð¸ÑÐµ ÑÐºÐ°Ð½ Ð¸Ð»Ð¸ ÑÐ¾ÑÐ¾ Ð»Ð¸ÑÑÐ° Ð½ÐµÑÑÑÐ´Ð¾ÑÐ¿Ð¾ÑÐ¾Ð±Ð½Ð¾ÑÑÐ¸. ÐÐ°ÐºÑÐ¸Ð¼Ð°Ð»ÑÐ½Ð°Ñ Ð²ÑÐ¿Ð»Ð°ÑÐ° Ð² 2025 Ð³Ð¾Ð´Ñ â 98 300 ÑÐµÐ½Ð³Ðµ. ÐÐ¾Ð´ÑÐ¾Ð±Ð½ÐµÐµ Ð¾ ÑÐ°ÑÑÑÑÐµ â Ð² ÑÐ°Ð·Ð´ÐµÐ»Ðµ ÐÑÑÐ³Ð°Ð»ÑÐµÑÐ¸Ñ ÑÑÐ¾Ð¹ ÑÑÑÐ°Ð½Ð¸ÑÑ.
+      </div></div>
+    </div>
+
+    <div class="faq-group-title">ÐÐ¾Ð¼Ð°Ð½Ð´Ð¸ÑÐ¾Ð²ÐºÐ¸ Ð¸ ÑÐ¿ÑÐ°Ð²ÐºÐ¸</div>
+
+    <div class="faq-card" data-tags="ÐºÐ¾Ð¼Ð°Ð½Ð´Ð¸ÑÐ¾Ð²ÐºÐ° Ð·Ð°ÑÐ²ÐºÐ° Ð¾ÑÐ¾ÑÐ¼Ð¸ÑÑ ÑÐ¾Ð³Ð»Ð°ÑÐ¾Ð²Ð°Ð½Ð¸Ðµ">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">âï¸</span>
+        <span class="faq-q-text">ÐÐ°Ðº Ð¾ÑÐ¾ÑÐ¼Ð¸ÑÑ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð¸ÑÐ¾Ð²ÐºÑ?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <strong>ÐÐ°ÑÐ°Ð»Ð¾Ð³ Ð·Ð°ÑÐ²Ð¾Ðº â ÐÐ¾Ð¼Ð°Ð½Ð´Ð¸ÑÐ¾Ð²ÐºÐ°</strong> (BilimLand) Ð¸Ð»Ð¸ ÐÐ¾Ð¼Ð°Ð½Ð´Ð¸ÑÐ¾Ð²ÐºÐ° InCraft / BF â Ð² Ð·Ð°Ð²Ð¸ÑÐ¸Ð¼Ð¾ÑÑÐ¸ Ð¾Ñ Ð²Ð°ÑÐµÐ³Ð¾ ÑÑÐ¸Ð´Ð¸ÑÐµÑÐºÐ¾Ð³Ð¾ Ð»Ð¸ÑÐ°.<br><br>
+        <span class="tag tag-amber">â ï¸ ÐÐ°Ð¶Ð½Ð¾</span> ÐÐ¾Ð´Ð°Ð²Ð°Ð¹ÑÐµ Ð·Ð°Ð±Ð»Ð°Ð³Ð¾Ð²ÑÐµÐ¼ÐµÐ½Ð½Ð¾ Ð´Ð¾ Ð¿Ð¾ÐµÐ·Ð´ÐºÐ¸ â Ð½ÑÐ¶Ð½Ð¾ Ð²ÑÐµÐ¼Ñ Ð½Ð° ÑÐ¾Ð³Ð»Ð°ÑÐ¾Ð²Ð°Ð½Ð¸Ðµ.<br><br>
+        <a href="https://bilimland.ismyteam.ru/requests/list" target="_blank">â ÐÑÐºÑÑÑÑ ÐºÐ°ÑÐ°Ð»Ð¾Ð³ Ð·Ð°ÑÐ²Ð¾Ðº</a>
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="ÑÐ¿ÑÐ°Ð²ÐºÐ° Ð¼ÐµÑÑÐ¾ ÑÐ°Ð±Ð¾ÑÑ Ð·Ð°ÑÐ¿Ð»Ð°ÑÐ½Ð°Ñ Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÑ Ð±Ð°Ð½Ðº">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ð</span>
+        <span class="faq-q-text">ÐÐ°Ðº Ð¿Ð¾Ð»ÑÑÐ¸ÑÑ ÑÐ¿ÑÐ°Ð²ÐºÑ Ñ Ð¼ÐµÑÑÐ° ÑÐ°Ð±Ð¾ÑÑ Ð¸Ð»Ð¸ Ð·Ð°ÑÐ¿Ð»Ð°ÑÐ½ÑÑ ÑÐ¿ÑÐ°Ð²ÐºÑ?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        ÐÑÐµ ÑÐ¿ÑÐ°Ð²ÐºÐ¸ ÑÐµÑÐµÐ· <strong>ÐÐ°ÑÐ°Ð»Ð¾Ð³ Ð·Ð°ÑÐ²Ð¾Ðº</strong> Ð½Ð° Ð¿Ð¾ÑÑÐ°Ð»Ðµ:<br><br>
+        <table>
+          <tr><th>Ð¢Ð¸Ð¿ ÑÐ¿ÑÐ°Ð²ÐºÐ¸</th><th>ÐÐ»Ñ ÐºÐ¾Ð³Ð¾</th></tr>
+          <tr><td>Ð¡Ð¿ÑÐ°Ð²ÐºÐ° Ñ Ð¼ÐµÑÑÐ° ÑÐ°Ð±Ð¾ÑÑ</td><td>BilimLand, UpSkill, InCraft, BF</td></tr>
+          <tr><td>ÐÐ°ÑÐ¿Ð»Ð°ÑÐ½Ð°Ñ ÑÐ¿ÑÐ°Ð²ÐºÐ°</td><td>BL/Upskill/BMG, Qlang/InCraft, BF</td></tr>
+        </table>
+        <br><span class="tag tag-blue">Ð¡ÑÐ¾Ðº</span> 1-2 ÑÐ°Ð±Ð¾ÑÐ¸Ñ Ð´Ð½Ñ Ð¿Ð¾ÑÐ»Ðµ Ð¿Ð¾Ð´Ð°ÑÐ¸ Ð·Ð°ÑÐ²ÐºÐ¸.
+      </div></div>
+    </div>
+
+    <div class="faq-group-title">ÐÑÐ³Ð¾ÑÑ Ð¸ Ð³ÐµÐ¹Ð¼Ð¸ÑÐ¸ÐºÐ°ÑÐ¸Ñ</div>
+
+    <div class="faq-card" data-tags="bilimcoin ÐºÐ¾Ð¸Ð½ Ð¼Ð¾Ð½ÐµÑÐ° Ð½Ð¾Ð¼Ð¸Ð½Ð°ÑÐ¸Ñ ÐºÐ¾Ð»Ð»ÐµÐ³Ð° Ð¼ÐµÑÑ Ð¼Ð°Ð³Ð°Ð·Ð¸Ð½">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ðª</span>
+        <span class="faq-q-text">Ð§ÑÐ¾ ÑÐ°ÐºÐ¾Ðµ Bilim Coin Ð¸ ÐºÐ°Ðº Ð¸Ñ Ð¿Ð¾ÑÑÐ°ÑÐ¸ÑÑ?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Bilim Coin â Ð²Ð½ÑÑÑÐµÐ½Ð½ÑÑ Ð²Ð°Ð»ÑÑÐ° Ð¿ÑÐ¸Ð·Ð½Ð°Ð½Ð¸Ñ. ÐÐ¾Ð¼Ð¸Ð½Ð¸ÑÑÐ¹ÑÐµ ÐºÐ¾Ð»Ð»ÐµÐ³Ñ Ð·Ð° Ð¿Ð¾Ð¼Ð¾ÑÑ Ð¸Ð»Ð¸ Ð´Ð¾ÑÑÐ¸Ð¶ÐµÐ½Ð¸Ðµ: <strong>ÐÐ°ÑÐ°Ð»Ð¾Ð³ Ð·Ð°ÑÐ²Ð¾Ðº â ÐÐ°ÑÐ²ÐºÐ° Ð½Ð° Ð½Ð¾Ð¼Ð¸Ð½Ð°ÑÐ¸Ñ Bilim Coin</strong>.<br><br>
+        ÐÐ°ÐºÐ¾Ð¿Ð»ÐµÐ½Ð½ÑÐµ ÐºÐ¾Ð¸Ð½Ñ ÑÑÐ°ÑÐ¸ÑÐµ Ð² <a href="https://bilimland.ismyteam.ru/prizes-store/catalog" target="_blank">Bilim Store</a>: ÑÑÐºÐ·Ð°ÐºÐ¸, ÑÐµÑÐ¼Ð¾ÐºÑÑÐ¶ÐºÐ¸, ÑÑÑÐ±Ð¾Ð»ÐºÐ¸, ÑÐ¾Ð¿Ð¿ÐµÑÑ Ð¸ Ð´ÑÑÐ³Ð¾Ð¹ Ð¼ÐµÑÑ Bilim Group.<br><br>
+        ÐÐ°Ð»Ð°Ð½Ñ ÐºÐ¾Ð¸Ð½Ð¾Ð² Ð²ÑÐµÐ³Ð´Ð° Ð²Ð¸Ð´ÐµÐ½ Ð² Ð¿ÑÐ°Ð²Ð¾Ð¼ Ð²ÐµÑÑÐ½ÐµÐ¼ ÑÐ³Ð»Ñ Ð¿ÑÐ¾ÑÐ¸Ð»Ñ Ð½Ð° Ð¿Ð¾ÑÑÐ°Ð»Ðµ.
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="ÑÐµÑÐµÑÐ°Ð»ÑÐ½Ð°Ñ Ð¿ÑÐ¾Ð³ÑÐ°Ð¼Ð¼Ð° Ð´ÑÑÐ³ Ð½Ð°Ð¹Ð¼ Ð²Ð¾Ð·Ð½Ð°Ð³ÑÐ°Ð¶Ð´ÐµÐ½Ð¸Ðµ ÐºÐ°Ð½Ð´Ð¸Ð´Ð°Ñ">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ð¤</span>
+        <span class="faq-q-text">ÐÐ°Ðº Ð¿Ð¾ÑÑÐ°ÑÑÐ²Ð¾Ð²Ð°ÑÑ Ð² ÑÐµÑÐµÑÐ°Ð»ÑÐ½Ð¾Ð¹ Ð¿ÑÐ¾Ð³ÑÐ°Ð¼Ð¼Ðµ?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        ÐÐ½Ð°ÐµÑÐµ Ð¿Ð¾Ð´ÑÐ¾Ð´ÑÑÐµÐ³Ð¾ ÐºÐ°Ð½Ð´Ð¸Ð´Ð°ÑÐ°? ÐÑÐ¾ÑÐ¼Ð¸ÑÐµ Ð·Ð°ÑÐ²ÐºÑ: <strong>ÐÐ°ÑÐ°Ð»Ð¾Ð³ Ð·Ð°ÑÐ²Ð¾Ðº â Ð ÐµÑÐµÑÐ°Ð»ÑÐ½Ð°Ñ Ð¿ÑÐ¾Ð³ÑÐ°Ð¼Ð¼Ð° Â«ÐÑÐ¸Ð²ÐµÐ´Ð¸ Ð´ÑÑÐ³Ð° Ð² ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸ÑÂ»</strong>.<br><br>
+        ÐÑÐ¸ ÑÑÐ¿ÐµÑÐ½Ð¾Ð¼ Ð½Ð°Ð¹Ð¼Ðµ Ð²Ñ Ð¿Ð¾Ð»ÑÑÐ¸ÑÐµ Ð²Ð¾Ð·Ð½Ð°Ð³ÑÐ°Ð¶Ð´ÐµÐ½Ð¸Ðµ ÑÐ¾Ð³Ð»Ð°ÑÐ½Ð¾ ÑÑÐ»Ð¾Ð²Ð¸ÑÐ¼ Ð¿ÑÐ¾Ð³ÑÐ°Ð¼Ð¼Ñ.
+      </div></div>
+    </div>
+
+    <div class="faq-card" data-tags="byod kitap bilimland Ð´Ð¾ÑÑÑÐ¿ ÑÐµÑÐ²Ð¸Ñ Ð¿Ð¾Ð´Ð±Ð¾Ñ Ð²Ð°ÐºÐ°Ð½ÑÐ¸Ñ">
+      <button class="faq-q" onclick="tog(this)">
+        <span class="faq-q-icon">ð±</span>
+        <span class="faq-q-text">BYOD, Kitap, ServiceDesk, Ð¿Ð¾Ð´Ð±Ð¾Ñ Ð¿ÐµÑÑÐ¾Ð½Ð°Ð»Ð° â ÐºÐ°Ðº Ð¾ÑÐ¾ÑÐ¼Ð¸ÑÑ?</span>
+        <span class="faq-chevron">â¼</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        ÐÑÐµ ÑÐµÑÐµÐ· <strong>ÐÐ°ÑÐ°Ð»Ð¾Ð³ Ð·Ð°ÑÐ²Ð¾Ðº</strong> Ð½Ð° Ð¿Ð¾ÑÑÐ°Ð»Ðµ:<br><br>
+        â¢ <strong>BYOD</strong> â ÐÐ°ÑÐ²ÐºÐ° Ð½Ð° ÑÑÐ°ÑÑÐ¸Ðµ Ð² Ð¿ÑÐ¾Ð³ÑÐ°Ð¼Ð¼Ðµ BYOD (Ð»Ð¸ÑÐ½Ð¾Ðµ ÑÑÑÑÐ¾Ð¹ÑÑÐ²Ð¾ Ð´Ð»Ñ ÑÐ°Ð±Ð¾ÑÑ)<br>
+        â¢ <strong>Kitap + Bilimland</strong> â ÐÐ°Ð¿ÑÐ¾Ñ Ð½Ð° Ð´Ð¾ÑÑÑÐ¿ Ðº Ð±Ð¸Ð±Ð»Ð¸Ð¾ÑÐµÐºÐµ Kitap Ð¸ Ð¿Ð»Ð°ÑÑÐ¾ÑÐ¼Ðµ Bilimland (ÑÐ¾ÑÐ¸Ð°Ð»ÑÐ½ÑÐ¹ Ð¿Ð°ÐºÐµÑ)<br>
+        â¢ <strong>Ð¢ÐµÑÐ½Ð¸ÑÐµÑÐºÐ¸Ðµ Ð²Ð¾Ð¿ÑÐ¾ÑÑ</strong> â ÐÐ°ÑÐ²ÐºÐ° Ð² ServiceDesk<br>
+        â¢ <strong>ÐÑÐºÑÑÑÑ Ð²Ð°ÐºÐ°Ð½ÑÐ¸Ñ</strong> â Ð½Ð°Ð¶Ð¼Ð¸ÑÐµ <strong>Â«+Â»</strong> Ð² Ð¿ÑÐ°Ð²Ð¾Ð¼ Ð²ÐµÑÑÐ½ÐµÐ¼ ÑÐ³Ð»Ñ Ð¿Ð¾ÑÑÐ°Ð»Ð° â Ð¡Ð¾Ð·Ð´Ð°ÑÑ Ð·Ð°ÑÐ²ÐºÑ Ð½Ð° Ð¿Ð¾Ð´Ð±Ð¾Ñ
+      </div></div>
+    </div>
+
+    <div class="cta-section">
+      <h3>ÐÐµ Ð½Ð°ÑÐ»Ð¸ Ð¾ÑÐ²ÐµÑ?</h3>
+      <p>ÐÐ°Ð´Ð°Ð¹ÑÐµ Ð²Ð¾Ð¿ÑÐ¾Ñ HR Ð² Slack â Ð¾ÑÐ²ÐµÑÐ¸Ð¼ Ð´Ð¾ 18:00 ÑÐµÐ³Ð¾Ð´Ð½Ñ</p>
+      <a class="cta-btn hr" href="https://slack.com/shortcuts/Ft09NG6QAYTA/c5a01cad0175f1cc678df5689cd755fd" target="_blank">
+        <span class="cta-btn-icon">ð¬</span> ÐÐ°Ð´Ð°ÑÑ Ð²Ð¾Ð¿ÑÐ¾Ñ HR
+      </a>
+    </div>
+  </div>
+
+  <!-- ââ Ð®Ð ÐÐ¡Ð¢Ð« ââ -->
+  <div class="panel" id="panel-legal">
+    <div class="section-head">
+      <div class="dept-icon legal">âï¸</div>
+      <div class="section-head-text">
+        <h2>Ð®ÑÐ¸Ð´Ð¸ÑÐµÑÐºÐ¸Ð¹ Ð¾ÑÐ´ÐµÐ»</h2>
+        <p>ÐÐ¾Ð³Ð¾Ð²Ð¾ÑÑ, NDA, Ð³Ð¾ÑÐ·Ð°ÐºÑÐ¿ÐºÐ¸, ÐºÐ¾Ð½ÑÑÐ»ÑÑÐ°ÑÐ¸Ð¸</p>
+      </div>
+    </div>
+
+    <div class="empty-state">
+      <div class="empty-icon">ð§</div>
+      <h3>ÐÐ°Ð·Ð° Ð·Ð½Ð°Ð½Ð¸Ð¹ Ð² ÑÐ°Ð·ÑÐ°Ð±Ð¾ÑÐºÐµ</h3>
+      <p>Ð®ÑÐ¸Ð´Ð¸ÑÐµÑÐºÐ¸Ð¹ Ð¾ÑÐ´ÐµÐ» Ð³Ð¾ÑÐ¾Ð²Ð¸Ñ Ð¾ÑÐ²ÐµÑÑ Ð½Ð° ÑÐ°Ð¼ÑÐµ ÑÐ°ÑÑÑÐµ Ð²Ð¾Ð¿ÑÐ¾ÑÑ.<br>Ð¡ÐºÐ¾ÑÐ¾ Ð·Ð´ÐµÑÑ Ð¿Ð¾ÑÐ²Ð¸ÑÑÑ Ð¿Ð¾Ð´ÑÐ¾Ð±Ð½Ð°Ñ Ð¸Ð½ÑÐ¾ÑÐ¼Ð°ÑÐ¸Ñ Ð¾ Ð´Ð¾Ð³Ð¾Ð²Ð¾ÑÐ°Ñ,<br>Ð´Ð¾Ð¿. ÑÐ¾Ð³Ð»Ð°ÑÐµÐ½Ð¸ÑÑ, NDA Ð¸ ÐºÐ¾Ð½ÑÑÐ»ÑÑÐ°ÑÐ¸ÑÑ.</p>
+      <div class="coming-badge">â³ Ð¡ÐºÐ¾ÑÐ¾ Ð·Ð´ÐµÑÑ Ð¿Ð¾ÑÐ²Ð¸ÑÑÑ Ð¸Ð½ÑÐ¾ÑÐ¼Ð°ÑÐ¸Ñ</div>
+    </div>
+
+    <div class="cta-section">
+      <h3>ÐÑÑÑ Ð²Ð¾Ð¿ÑÐ¾Ñ Ð¿ÑÑÐ¼Ð¾ ÑÐµÐ¹ÑÐ°Ñ?</h3>
+      <p>ÐÐ°Ð´Ð°Ð¹ÑÐµ Ð²Ð¾Ð¿ÑÐ¾Ñ ÑÑÐ¸ÑÑÑ Ð² Slack â Ð¾ÑÐ²ÐµÑÐ¸Ð¼ Ð´Ð¾ 18:00 ÑÐ»ÐµÐ´ÑÑÑÐµÐ³Ð¾ ÑÐ°Ð±Ð¾ÑÐµÐ³Ð¾ Ð´Ð½Ñ</p>
+      <a class="cta-btn legal" href="https://slack.com/shortcuts/Ft09NG6QAYTA/c5a01cad0175f1cc678df5689cd755fd" target="_blank">
+        <span class="cta-btn-icon">ð¬</span> ÐÐ°Ð´Ð°ÑÑ Ð²Ð¾Ð¿ÑÐ¾Ñ ÑÑÐ¸ÑÑÑ
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Bilim Group</span> Â· ÐÐ¾ÑÐ¿Ð¾ÑÐ°ÑÐ¸Ð²Ð½Ð°Ñ Ð±Ð°Ð·Ð° Ð·Ð½Ð°Ð½Ð¸Ð¹ Â· Ð¡ÑÐ¾Ðº Ð¾ÑÐ²ÐµÑÐ° Ð´Ð¾ 18:00 ÑÐµÐºÑÑÐµÐ³Ð¾ ÑÐ°Ð±Ð¾ÑÐµÐ³Ð¾ Ð´Ð½Ñ
+</footer>
+
+<script>
+// ââ TAB SWITCH âââââââââââââââââââââââââââââââââââââââââ
+function setTab(tab) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.dept-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+  document.querySelectorAll(`[data-tab="${tab}"]`).forEach(t => t.classList.add('active'));
+  document.querySelectorAll(`.nav-tab`).forEach(t => { if(t.textContent.toLowerCase().includes(tab==='fin'?'Ð±ÑÑ':tab==='hr'?'hr':'ÑÑ')) t.classList.add('active') });
+  document.getElementById('search').value = '';
+  document.getElementById('no-results').style.display = 'none';
+  document.querySelectorAll('.faq-card').forEach(c => { c.style.display = ''; removeHL(c) });
+}
+
+// ââ ACCORDION ââââââââââââââââââââââââââââââââââââââââââ
+function tog(btn) {
+  const card = btn.closest('.faq-card');
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.faq-card.open').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+// ââ SEARCH âââââââââââââââââââââââââââââââââââââââââââââ
+function doSearch(q) {
+  q = q.toLowerCase().trim();
+  const cards = document.querySelectorAll('.faq-card');
+  const panels = document.querySelectorAll('.panel');
+  const tabs = document.querySelector('.dept-tabs');
+
+  if (!q) {
+    tabs.style.display = 'flex';
+    panels.forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-fin').classList.add('active');
+    document.querySelectorAll('.dept-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('[data-tab="fin"]').classList.add('active');
+    cards.forEach(c => { c.style.display = ''; c.classList.remove('open'); removeHL(c) });
+    document.getElementById('no-results').style.display = 'none';
+    document.querySelectorAll('.empty-state,.cta-section,.faq-group-title').forEach(e => e.style.display = '');
+    return;
+  }
+
+  tabs.style.display = 'none';
+  panels.forEach(p => p.classList.add('active'));
+  document.querySelectorAll('.empty-state,.cta-section,.faq-group-title').forEach(e => e.style.display = 'none');
+
+  let found = 0;
+  cards.forEach(card => {
+    const txt = (card.textContent + ' ' + (card.dataset.tags || '')).toLowerCase();
+    if (txt.includes(q)) {
+      card.style.display = '';
+      card.classList.add('open');
+      applyHL(card, q);
+      found++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  document.getElementById('no-results').style.display = found ? 'none' : 'block';
+}
+
+function applyHL(card, q) {
+  removeHL(card);
+  const inner = card.querySelector('.faq-a-inner');
+  if (!inner) return;
+  inner.innerHTML = inner.innerHTML.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<span class="hl">$1</span>');
+}
+function removeHL(card) {
+  const inner = card.querySelector('.faq-a-inner');
+  if (!inner) return;
+  inner.innerHTML = inner.innerHTML.replace(/<span class="hl">(.*?)<\/span>/gi, '$1');
+}
+</script>
+</body>
+</html>
